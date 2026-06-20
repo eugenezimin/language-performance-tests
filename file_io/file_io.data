@@ -130,5 +130,49 @@
         "lines": 1015500
       }
     }
+  },
+  "Python 3.14": {
+    "color": "#FFD43B",
+    "file_bytes": 44910300,
+    "n_lines": 1015500,
+    "samples": 100,
+    "variants": {
+      "read_text + splitlines": {
+        "ms_p50": 76.296,
+        "ms_p99": 83.512,
+        "ms_p999": 87.311,
+        "heap_peak_kb": 198655,
+        "heap_live_kb": 111208,
+        "rss_peak_kb": 0,
+        "lines": 1015500
+      },
+      "buffered lines": {
+        "ms_p50": 123.97,
+        "ms_p99": 130.376,
+        "ms_p999": 133.008,
+        "heap_peak_kb": 111350,
+        "heap_live_kb": 111208,
+        "rss_peak_kb": 0,
+        "lines": 1015500
+      },
+      "manual chunk": {
+        "ms_p50": 922.753,
+        "ms_p99": 941.778,
+        "ms_p999": 972.978,
+        "heap_peak_kb": 111424,
+        "heap_live_kb": 111208,
+        "rss_peak_kb": 0,
+        "lines": 1015500
+      },
+      "mmap (stdlib)": {
+        "ms_p50": 166.448,
+        "ms_p99": 176.475,
+        "ms_p999": 177.079,
+        "heap_peak_kb": 111338,
+        "heap_live_kb": 111208,
+        "rss_peak_kb": 0,
+        "lines": 1015500
+      }
+    }
   }
 }
