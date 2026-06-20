@@ -1,4 +1,39 @@
 {
+  "Go": {
+    "color": "#00ADD8",
+    "file_bytes": 44910300,
+    "n_lines": 1015500,
+    "samples": 100,
+    "variants": {
+      "ReadFile + Split": {
+        "heap_live_kb": 59736,
+        "heap_peak_kb": 103600,
+        "lines": 1015500,
+        "ms_p50": 23.177,
+        "ms_p99": 25.183,
+        "ms_p999": 31.698,
+        "rss_peak_kb": 0
+      },
+      "bufio.Scanner": {
+        "heap_live_kb": 66484,
+        "heap_peak_kb": 135106,
+        "lines": 1015500,
+        "ms_p50": 52.745,
+        "ms_p99": 55.149,
+        "ms_p999": 55.272,
+        "rss_peak_kb": 0
+      },
+      "manual chunk": {
+        "heap_live_kb": 66484,
+        "heap_peak_kb": 135103,
+        "lines": 1015500,
+        "ms_p50": 71.451,
+        "ms_p99": 73.784,
+        "ms_p999": 74.328,
+        "rss_peak_kb": 0
+      }
+    }
+  },
   "Rust": {
     "color": "#CE422B",
     "file_bytes": 44910300,
