@@ -1,0 +1,67 @@
+{
+  "Go": {
+    "color": "#00ADD8",
+    "n_tasks": 3,
+    "n_terms": 500000000,
+    "serial_ms": 1306.9,
+    "variants": {
+      "fan-in": 446.6,
+      "fixed pool (size=2)": 870.7,
+      "goroutines": 447,
+      "serial": 1306.9,
+      "worker pool": 445.4
+    }
+  },
+  "Java": {
+    "color": "#E76F00",
+    "n_tasks": 3,
+    "n_terms": 500000000,
+    "serial_ms": 1283.8,
+    "variants": {
+      "CompletableFuture": 461.1,
+      "ForkJoinPool": 456.5,
+      "Thread.start": 453.8,
+      "ThreadPoolExecutor": 456.9,
+      "worker pool (size=2)": 867.9
+    }
+  },
+  "Rust": {
+    "color": "#CE422B",
+    "n_tasks": 3,
+    "n_terms": 500000000,
+    "serial_ms": 1276.7,
+    "variants": {
+      "async (tokio)": 446.8,
+      "futures-cpupool": 446.2,
+      "rayon": 445.2,
+      "thread::spawn": 446.2,
+      "threadpool": 444.2
+    }
+  },
+  "Node.js": {
+    "color": "#3C873A",
+    "n_terms": 500000000,
+    "n_tasks": 3,
+    "serial_ms": 1391,
+    "variants": {
+      "serial": 1391,
+      "async/await": 1396.2,
+      "worker_threads": 505.6,
+      "worker pool": 950.1,
+      "child_process": 519.4
+    }
+  },
+  "Python 3.14t": {
+    "color": "#FFD43B",
+    "n_terms": 500000000,
+    "n_tasks": 3,
+    "serial_ms": 91931.4,
+    "variants": {
+      "threading": 36164.0,
+      "multiprocessing": 32839.0,
+      "asyncio": 32921.7,
+      "ThreadPoolExecutor": 36972.6,
+      "ProcessPoolExecutor": 32940.6
+    }
+  }
+}
