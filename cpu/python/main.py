@@ -27,7 +27,6 @@ def worker(n_terms):
     return result
 
 
-# 1. threading  (GIL-bound: no real speedup for CPU work)
 def compute_with_threads():
     threads = [threading.Thread(target=worker, args=(N_TERMS,)) for _ in range(N_TASKS)]
     for t in threads:
@@ -36,7 +35,6 @@ def compute_with_threads():
         t.join()
 
 
-# 2. multiprocessing  (separate interpreters -> real parallelism)
 def compute_with_processes():
     procs = [multiprocessing.Process(target=worker, args=(N_TERMS,)) for _ in range(N_TASKS)]
     for p in procs:
@@ -45,7 +43,6 @@ def compute_with_processes():
         p.join()
 
 
-# 3. asyncio  (CPU work offloaded to a process pool; async alone won't parallelize CPU)
 async def _async_main():
     loop = asyncio.get_running_loop()
     with ProcessPoolExecutor(max_workers=N_TASKS) as pool:
@@ -57,13 +54,11 @@ def compute_with_asyncio():
     asyncio.run(_async_main())
 
 
-# 4. ThreadPoolExecutor  (analog of your Rust threadpool; still GIL-bound)
 def compute_with_thread_pool():
     with ThreadPoolExecutor(max_workers=N_TASKS) as pool:
         list(pool.map(worker, [N_TERMS] * N_TASKS))
 
 
-# 5. ProcessPoolExecutor  (analog of futures-cpupool / rayon; real parallelism)
 def compute_with_process_pool():
     with ProcessPoolExecutor(max_workers=N_TASKS) as pool:
         list(pool.map(worker, [N_TERMS] * N_TASKS))

@@ -24,7 +24,6 @@ function worker(nTerms) {
   console.log(`  \u03C0[${nTerms}] = ${computePi(nTerms)}`);
 }
 
-// --- Entry point when this file is launched as a WORKER THREAD ---
 if (!isMainThread) {
   parentPort.on("message", (nTerms) => {
     worker(nTerms);
@@ -33,18 +32,15 @@ if (!isMainThread) {
   return; // stop here; do not run main()
 }
 
-// --- Entry point when this file is launched as a FORKED CHILD PROCESS ---
 if (process.env.PI_CHILD) {
   worker(Number(process.env.PI_CHILD));
   process.exit(0);
 }
 
-// 1. serial baseline (blocks the event loop)
 function computeSerial() {
   for (let i = 0; i < N_TASKS; i++) worker(N_TERMS);
 }
 
-// 2. async/await -> still serial for CPU work; no real overlap
 async function computeWithAsync() {
   await Promise.all(
     Array.from({ length: N_TASKS }, () =>
@@ -53,7 +49,6 @@ async function computeWithAsync() {
   );
 }
 
-// 3. worker_threads -> one OS thread per task, REAL parallelism
 function computeWithWorkerThreads() {
   return Promise.all(
     Array.from({ length: N_TASKS }, () =>
@@ -66,7 +61,6 @@ function computeWithWorkerThreads() {
   );
 }
 
-// 4. worker pool -> fixed set of threads reused across tasks
 function computeWithWorkerPool() {
   const tasks = Array.from({ length: N_TASKS }, () => N_TERMS);
   const size = Math.min(POOL_SIZE, tasks.length);
@@ -93,7 +87,6 @@ function computeWithWorkerPool() {
   });
 }
 
-// 5. child_process.fork -> separate Node processes
 function computeWithChildProcess() {
   return Promise.all(
     Array.from({ length: N_TASKS }, () =>

@@ -128,3 +128,6 @@ gradle-app.setting
 # results/
 # *.bench.json
 # *.csv
+/cpu/java/gradle
+/cpu/java/gradlew
+/cpu/java/gradlew.bat

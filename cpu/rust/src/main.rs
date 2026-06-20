@@ -24,7 +24,6 @@ fn worker(n_terms: u32) {
     println!("  π[{}] = {}", n_terms, compute_pi(n_terms));
 }
 
-// 1. threading -> std::thread::spawn
 fn compute_with_threads() {
     let handles: Vec<_> = (0..N_TASKS)
         .map(|_| std::thread::spawn(|| worker(N_TERMS)))
@@ -34,12 +33,10 @@ fn compute_with_threads() {
     }
 }
 
-// 2. multiprocessing analog -> rayon (real data parallelism)
 fn compute_with_rayon() {
     (0..N_TASKS).into_par_iter().for_each(|_| worker(N_TERMS));
 }
 
-// 3. ThreadPoolExecutor -> threadpool
 fn compute_with_threadpool() {
     let pool = ThreadPool::new(num_cpus::get());
     for _ in 0..N_TASKS {
@@ -48,7 +45,6 @@ fn compute_with_threadpool() {
     pool.join();
 }
 
-// 4. asyncio -> tokio (CPU work via spawn_blocking)
 fn compute_with_async() {
     let rt = tokio::runtime::Runtime::new().unwrap();
     rt.block_on(async {
@@ -62,7 +58,6 @@ fn compute_with_async() {
     });
 }
 
-// 5. ProcessPoolExecutor analog -> futures-cpupool
 fn compute_with_cpupool() {
     let pool = CpuPool::new_num_cpus();
     let futs: Vec<_> = (0..N_TASKS)
