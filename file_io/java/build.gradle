@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.test'
+version = '0.0.1'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Plain library, not a framework. Used ONLY at the end to merge this run's
+    // block into ../file_io.data, never inside a timed/measured region.
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
+}
+
+// Self-contained run task — no application plugin, no start scripts. Lazily
+// registered, so it never depends on another task existing at config time.
+// Pinned heap + explicit G1 so RSS and the p999 GC tail are reproducible.
+// workingDir + bench.base anchor fixture/data resolution to file_io/ regardless
+// of cwd (Rust CARGO_MANIFEST_DIR / Go runtime.Caller analog).
+tasks.register('bench', JavaExec) {
+    group = 'benchmark'
+    description = 'Run the file_io line-reading benchmark'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.test.fileio.Main'
+    workingDir = projectDir
+    systemProperty 'bench.base', projectDir.toString()
+    jvmArgs = ['-Xms2g', '-Xmx2g', '-XX:+UseG1GC']
+    // If a future build warns about restricted FFM methods:
+    // jvmArgs += '--enable-native-access=ALL-UNNAMED'
+}
