@@ -12,6 +12,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"syscall"
 	"time"
 )
 
@@ -103,6 +104,49 @@ func manualChunk(path string) []string {
 	}
 	if len(carry) > 0 {
 		lines = append(lines, string(carry))
+	}
+	return lines
+}
+
+//  4. mmap (syscall) — map the file into the address space, scan bytes in
+//     place, string(seg[a:b]) copies each line owned (matches manualChunk).
+//     The mapping is OS memory, NOT on the Go heap, so ReadMemStats HeapAlloc
+//     (heap_peak/heap_live) reflects only the line slice + strings — no 45 MB
+//     heap buffer; the faulted pages surface in rss_peak instead. Expect time
+//     ≈ manual chunk (copy dominates), heap_peak the LOWEST of the four.
+func mmapScan(path string) []string {
+	f, err := os.Open(path)
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+	fi, err := f.Stat()
+	if err != nil {
+		panic(err)
+	}
+	size := int(fi.Size())
+	if size == 0 {
+		return []string{}
+	}
+	seg, err := syscall.Mmap(int(f.Fd()), 0, size,
+		syscall.PROT_READ, syscall.MAP_PRIVATE)
+	if err != nil {
+		panic(err)
+	}
+	defer syscall.Munmap(seg)
+
+	var lines []string
+	start := 0
+	for i := 0; i < size; i++ {
+		if seg[i] == '\n' {
+			lines = append(lines, string(seg[start:i]))
+			start = i + 1
+		}
+	}
+	// No trailing empty for a '\n'-terminated file (start == size here),
+	// matching bufio.Scanner and manualChunk.
+	if start < size {
+		lines = append(lines, string(seg[start:]))
 	}
 	return lines
 }
@@ -296,11 +340,13 @@ func main() {
 	s1 := measure("ReadFile + Split", samples, func() []string { return readFileSplit(path) })
 	s2 := measure("bufio.Scanner", samples, func() []string { return bufioScanner(path) })
 	s3 := measure("manual chunk", samples, func() []string { return manualChunk(path) })
+	s4 := measure("mmap (syscall)", samples, func() []string { return mmapScan(path) })
 
 	save(dataPath, "Go", "#00ADD8", fileBytes, s1.lines, samples,
 		[]namedStats{
 			{"ReadFile + Split", s1},
 			{"bufio.Scanner", s2},
 			{"manual chunk", s3},
+			{"mmap (syscall)", s4},
 		})
 }

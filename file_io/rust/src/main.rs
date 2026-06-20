@@ -1,3 +1,4 @@
+use memmap2::Mmap;
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::fs::{self, File};
 use std::io::{BufRead, BufReader, Read};
@@ -124,8 +125,36 @@ fn manual_chunk(path: &Path) -> Vec<String> {
         }
         carry.extend_from_slice(&buf[start..n]); // partial line + partial char
     }
+
     if !carry.is_empty() {
         lines.push(String::from_utf8_lossy(&carry).into_owned());
+    }
+    lines
+}
+
+// 4. mmap — map the file into the address space (memmap2), scan bytes in
+//    place, decode each line owned via from_utf8_lossy to match manual_chunk.
+//    The whole-file mapping is OS memory obtained via mmap(2): it does NOT go
+//    through the counting GlobalAlloc, so heap_peak here reflects only the line
+//    Vec + per-line Strings (no 45 MB heap buffer). The faulted pages instead
+//    show up in rss_peak. Expect time ≈ manual chunk (the copy, not the read,
+//    dominates), heap_peak the LOWEST of the four, rss_peak the highest.
+fn mmap_scan(path: &Path) -> Vec<String> {
+    let file = File::open(path).expect("open");
+    // SAFETY: the fixture is not mutated by another process during the run.
+    let mmap = unsafe { Mmap::map(&file).expect("mmap") };
+    let mut lines: Vec<String> = Vec::new();
+    let mut start = 0usize;
+    for i in 0..mmap.len() {
+        if mmap[i] == b'\n' {
+            lines.push(String::from_utf8_lossy(&mmap[start..i]).into_owned());
+            start = i + 1;
+        }
+    }
+    // No trailing empty for a '\n'-terminated file (start == len here),
+    // matching slurp_split's .lines() and manual_chunk.
+    if start < mmap.len() {
+        lines.push(String::from_utf8_lossy(&mmap[start..]).into_owned());
     }
     lines
 }
@@ -264,6 +293,7 @@ fn main() {
     let s1 = measure("slurp + split", SAMPLES, || slurp_split(&path));
     let s2 = measure("buffered lines", SAMPLES, || buffered_lines(&path));
     let s3 = measure("manual chunk", SAMPLES, || manual_chunk(&path));
+    let s4 = measure("mmap (memmap2)", SAMPLES, || mmap_scan(&path));
 
     let n_lines = s1.lines;
     save(
@@ -277,6 +307,7 @@ fn main() {
             ("slurp + split", s1),
             ("buffered lines", s2),
             ("manual chunk", s3),
+            ("mmap (memmap2)", s4),
         ],
     );
 }

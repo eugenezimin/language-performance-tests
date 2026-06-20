@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+memmap2 = "0.9.10"
 # Only used at the end to merge results into the data file — never inside a
 # timed or memory-measured region.
 serde_json = { version = "1", features = ["preserve_order"] }
