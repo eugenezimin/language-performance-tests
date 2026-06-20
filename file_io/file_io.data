@@ -174,5 +174,40 @@
         "lines": 1015500
       }
     }
+  },
+  "Node.js": {
+    "color": "#3C873A",
+    "file_bytes": 44910300,
+    "n_lines": 1015500,
+    "samples": 100,
+    "variants": {
+      "readFileSync + split": {
+        "ms_p50": 116.018,
+        "ms_p99": 206.45,
+        "ms_p999": 242.476,
+        "heap_peak_kb": 127116,
+        "heap_live_kb": 127112,
+        "rss_peak_kb": 0,
+        "lines": 1015500
+      },
+      "readline (stream)": {
+        "ms_p50": 199.181,
+        "ms_p99": 293.993,
+        "ms_p999": 294.238,
+        "heap_peak_kb": 157295,
+        "heap_live_kb": 129410,
+        "rss_peak_kb": 0,
+        "lines": 1015500
+      },
+      "manual chunk": {
+        "ms_p50": 214.792,
+        "ms_p99": 237.374,
+        "ms_p999": 238.582,
+        "heap_peak_kb": 93685,
+        "heap_live_kb": 74835,
+        "rss_peak_kb": 0,
+        "lines": 1015500
+      }
+    }
   }
 }
