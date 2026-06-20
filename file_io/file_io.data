@@ -1,0 +1,37 @@
+{
+  "Rust": {
+    "color": "#CE422B",
+    "file_bytes": 44910300,
+    "n_lines": 1015500,
+    "samples": 100,
+    "variants": {
+      "slurp + split": {
+        "ms_p50": 60.987,
+        "ms_p99": 73.508,
+        "ms_p999": 74.684,
+        "heap_peak_kb": 111299,
+        "heap_live_kb": 67442,
+        "rss_peak_kb": 0,
+        "lines": 1015500
+      },
+      "buffered lines": {
+        "ms_p50": 68.862,
+        "ms_p99": 77.336,
+        "ms_p999": 77.431,
+        "heap_peak_kb": 68514,
+        "heap_live_kb": 68506,
+        "rss_peak_kb": 0,
+        "lines": 1015500
+      },
+      "manual chunk": {
+        "ms_p50": 74.221,
+        "ms_p99": 78.029,
+        "ms_p999": 78.892,
+        "heap_peak_kb": 67506,
+        "heap_live_kb": 67442,
+        "rss_peak_kb": 0,
+        "lines": 1015500
+      }
+    }
+  }
+}
