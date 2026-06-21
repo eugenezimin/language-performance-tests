@@ -1,4 +1,124 @@
 {
+  "Go": {
+    "color": "#00ADD8",
+    "file_bytes": 0,
+    "n_lines": 0,
+    "n_tasks": 100,
+    "n_terms": 10000,
+    "samples": 1000,
+    "variants": {
+      "chunked (NumCPU)": {
+        "heap_live_kb": 0,
+        "heap_peak_kb": 0,
+        "lines": 0,
+        "ms_p50": 0.193,
+        "ms_p99": 0.225,
+        "ms_p999": 0.252,
+        "rss_peak_kb": 0
+      },
+      "errgroup (limit=NumCPU)": {
+        "heap_live_kb": 0,
+        "heap_peak_kb": 0,
+        "lines": 0,
+        "ms_p50": 0.189,
+        "ms_p99": 0.255,
+        "ms_p999": 0.381,
+        "rss_peak_kb": 0
+      },
+      "goroutine-per-task": {
+        "heap_live_kb": 0,
+        "heap_peak_kb": 0,
+        "lines": 0,
+        "ms_p50": 0.172,
+        "ms_p99": 0.211,
+        "ms_p999": 0.254,
+        "rss_peak_kb": 0
+      },
+      "serial": {
+        "heap_live_kb": 0,
+        "heap_peak_kb": 0,
+        "lines": 0,
+        "ms_p50": 0.857,
+        "ms_p99": 0.949,
+        "ms_p999": 1.167,
+        "rss_peak_kb": 0
+      },
+      "worker pool": {
+        "heap_live_kb": 0,
+        "heap_peak_kb": 0,
+        "lines": 0,
+        "ms_p50": 0.165,
+        "ms_p99": 0.209,
+        "ms_p999": 0.273,
+        "rss_peak_kb": 0
+      }
+    }
+  },
+  "Go (alloc)": {
+    "color": "#5DC9E2",
+    "file_bytes": 0,
+    "n_lines": 0,
+    "n_tasks": 100,
+    "n_terms": 10000,
+    "samples": 1000,
+    "variants": {
+      "chunked (NumCPU)": {
+        "gc_cycles": 684,
+        "gc_pause_ms": 68.481,
+        "heap_live_kb": 0,
+        "heap_peak_kb": 0,
+        "lines": 0,
+        "ms_p50": 0.532,
+        "ms_p99": 0.845,
+        "ms_p999": 0.91,
+        "rss_peak_kb": 0
+      },
+      "errgroup (limit=NumCPU)": {
+        "gc_cycles": 760,
+        "gc_pause_ms": 96.234,
+        "heap_live_kb": 0,
+        "heap_peak_kb": 0,
+        "lines": 0,
+        "ms_p50": 0.607,
+        "ms_p99": 0.859,
+        "ms_p999": 0.954,
+        "rss_peak_kb": 0
+      },
+      "goroutine-per-task": {
+        "gc_cycles": 670,
+        "gc_pause_ms": 90.601,
+        "heap_live_kb": 0,
+        "heap_peak_kb": 0,
+        "lines": 0,
+        "ms_p50": 0.613,
+        "ms_p99": 1.141,
+        "ms_p999": 1.241,
+        "rss_peak_kb": 0
+      },
+      "serial": {
+        "gc_cycles": 943,
+        "gc_pause_ms": 27.128,
+        "heap_live_kb": 0,
+        "heap_peak_kb": 0,
+        "lines": 0,
+        "ms_p50": 1.102,
+        "ms_p99": 1.23,
+        "ms_p999": 1.311,
+        "rss_peak_kb": 0
+      },
+      "worker pool": {
+        "gc_cycles": 507,
+        "gc_pause_ms": 56.209,
+        "heap_live_kb": 0,
+        "heap_peak_kb": 0,
+        "lines": 0,
+        "ms_p50": 0.508,
+        "ms_p99": 0.842,
+        "ms_p999": 0.949,
+        "rss_peak_kb": 0
+      }
+    }
+  },
   "Rust": {
     "color": "#CE422B",
     "file_bytes": 0,
