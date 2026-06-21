@@ -1,34 +1,35 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '4.1.1-SNAPSHOT'
-	id 'io.spring.dependency-management' version '1.1.7'
+    id 'java'
 }
 
 group = 'com.test'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(25)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
 }
 
 repositories {
-	mavenCentral()
-	maven { url = 'https://repo.spring.io/snapshot' }
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testCompileOnly 'org.projectlombok:lombok'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	testAnnotationProcessor 'org.projectlombok:lombok'
+    // Plain library, not a framework. Used ONLY at the end to merge this run's
+    // block into ../plot.data, never inside a timed region.
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+// Self-contained run task — no Spring Boot, no application plugin, no start
+// scripts. workingDir + bench.base anchor plot.data resolution to cpu/ regardless
+// of cwd. Pinned heap + explicit G1 so the p999 tail isn't heap-resize jitter.
+tasks.register('bench', JavaExec) {
+    group = 'benchmark'
+    description = 'Run the CPU concurrency benchmark (Leibniz π)'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.test.cpu.Main'
+    workingDir = projectDir
+    systemProperty 'bench.base', projectDir.toString()
+    jvmArgs = ['-Xms2g', '-Xmx2g', '-XX:+UseG1GC']
 }
