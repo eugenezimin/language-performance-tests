@@ -319,5 +319,42 @@
         "lines": 0
       }
     }
+  },
+  "Node.js": {
+    "color": "#3C873A",
+    "file_bytes": 0,
+    "n_lines": 0,
+    "n_terms": 10000,
+    "n_tasks": 100,
+    "samples": 1000,
+    "variants": {
+      "serial": {
+        "ms_p50": 0.908,
+        "ms_p99": 1.156,
+        "ms_p999": 1.771,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      },
+      "Promise.all": {
+        "ms_p50": 0.994,
+        "ms_p99": 1.107,
+        "ms_p999": 1.178,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      },
+      "worker pool": {
+        "ms_p50": 0.538,
+        "ms_p99": 0.726,
+        "ms_p999": 0.782,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      }
+    }
   }
 }

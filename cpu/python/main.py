@@ -222,4 +222,4 @@ if __name__ == "__main__":
             ("asyncio (pure gather)", measure("asyncio (pure gather)", compute_with_asyncio_pure)),
         ]
 
-    save("../plot.data", "python", "#FFD43B", SAMPLES, variants)
+    save("../plot.data", "Python (no GIL)", "#FFD43B", SAMPLES, variants)

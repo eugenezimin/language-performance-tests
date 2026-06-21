@@ -264,7 +264,7 @@ func main() {
 
 	// Distinct key so the allocation scenario coexists with the dispatch block
 	// in the same plot.data — the A-vs-B contrast is visible side by side.
-	save(dataPath, "Go (alloc)", "#5DC9E2", variants)
+	save(dataPath, "Go (allocation with GC)", "#5DC9E2", variants)
 
 	fmt.Printf("sink=%d\n", atomic.LoadUint64(&sink))
 }
