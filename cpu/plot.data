@@ -1,0 +1,66 @@
+{
+  "Rust": {
+    "color": "#CE422B",
+    "file_bytes": 0,
+    "n_lines": 0,
+    "n_terms": 10000,
+    "n_tasks": 100,
+    "samples": 1000,
+    "variants": {
+      "serial": {
+        "ms_p50": 0.844,
+        "ms_p99": 1.533,
+        "ms_p999": 1.827,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      },
+      "thread::spawn": {
+        "ms_p50": 1.327,
+        "ms_p99": 1.412,
+        "ms_p999": 1.483,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      },
+      "rayon": {
+        "ms_p50": 0.143,
+        "ms_p99": 0.213,
+        "ms_p999": 0.29,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      },
+      "threadpool": {
+        "ms_p50": 0.332,
+        "ms_p99": 0.385,
+        "ms_p999": 0.434,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      },
+      "async (tokio)": {
+        "ms_p50": 1.243,
+        "ms_p99": 2.23,
+        "ms_p999": 2.405,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      },
+      "futures-cpupool": {
+        "ms_p50": 0.34,
+        "ms_p99": 0.395,
+        "ms_p999": 0.439,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      }
+    }
+  }
+}
