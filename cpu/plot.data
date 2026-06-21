@@ -62,5 +62,78 @@
         "lines": 0
       }
     }
+  },
+  "python": {
+    "color": "#FFD43B",
+    "file_bytes": 0,
+    "n_lines": 0,
+    "n_terms": 10000,
+    "n_tasks": 100,
+    "samples": 1000,
+    "variants": {
+      "serial": {
+        "ms_p50": 37.588,
+        "ms_p99": 38.348,
+        "ms_p999": 39.516,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      },
+      "threading": {
+        "ms_p50": 8.62,
+        "ms_p99": 10.858,
+        "ms_p999": 11.66,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      },
+      "ThreadPoolExecutor": {
+        "ms_p50": 6.18,
+        "ms_p99": 8.785,
+        "ms_p999": 9.685,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      },
+      "ProcessPoolExecutor": {
+        "ms_p50": 8.363,
+        "ms_p99": 9.162,
+        "ms_p999": 11.243,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      },
+      "multiprocessing.Pool": {
+        "ms_p50": 5.051,
+        "ms_p99": 6.408,
+        "ms_p999": 7.138,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      },
+      "asyncio (to_thread)": {
+        "ms_p50": 9.426,
+        "ms_p99": 12.055,
+        "ms_p999": 13.295,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      },
+      "asyncio (pure gather)": {
+        "ms_p50": 37.853,
+        "ms_p99": 39.159,
+        "ms_p999": 40.053,
+        "heap_peak_kb": 0,
+        "heap_live_kb": 0,
+        "rss_peak_kb": 0,
+        "lines": 0
+      }
+    }
   }
 }
